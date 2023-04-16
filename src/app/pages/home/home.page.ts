@@ -18,8 +18,17 @@ export class HomePage implements OnInit {
   constructor(private beerService: BeerService) {}
 
   beersList$: Observable<BeerInterface[]>
+  currentPage: number = 1
+  pages: {page: number}[] = [{page: 1}, {page: 2}, {page: 3}]
   isModalOpen: boolean = false
+
+  changePage(page: number) {
+    if (page !== this.currentPage) {
+      this.currentPage = page
+      this.beersList$ = this.beerService.getAllBeers(this.currentPage)
+    }
+  }
   ngOnInit(): void {
-    this.beersList$ = this.beerService.getAllBeers()
+    this.beersList$ = this.beerService.getAllBeers(this.currentPage)
   }
 }
