@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import {BeerService} from "../services/beer.service";
+import {BeerInterface} from "../interfaces/beer.interface";
 
 @Component({
   selector: 'app-home',
@@ -12,11 +13,10 @@ import {BeerService} from "../services/beer.service";
 export class HomePage implements OnInit {
   constructor(private beerService: BeerService) {}
 
-  beersList = []
+  beersList: BeerInterface[] = []
   ngOnInit(): void {
     this.beerService.getAllBeers().subscribe((beers) => {
-      console.log(beers)
-      this.beersList = beers as []
+      this.beersList = beers as BeerInterface[]
     })
   }
 }
