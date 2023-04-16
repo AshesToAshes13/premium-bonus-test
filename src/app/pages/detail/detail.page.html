@@ -1,0 +1,33 @@
+<ion-header [translucent]="true" *ngIf="beer">
+  <ion-toolbar>
+    <ion-back-button
+      slot="start"
+      defaultHref="/"
+    ></ion-back-button>
+    <ion-title style="text-align: center">{{ beer.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="changeFavorite(beer)">
+        <ion-icon *ngIf="!isInFav" name="star-outline" size="large" color="general"></ion-icon>
+        <ion-icon *ngIf="isInFav" name="star" size="large" color="general"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="beer">
+  <img class="beer-image" [src]="beer.image_url" [alt]="beer.name">
+  <ion-title>{{beer.name}}</ion-title>
+  <div class="detail-block">
+    <p>ABV: {{ beer.abv }}%</p>
+    <p>IBU: {{ beer.ibu }}</p>
+    <p>
+      Хорошо сочитается с:
+      <span
+        *ngFor="let food of beer.food_pairing; let i = index"
+      >
+        {{food}}{{i + 1 === beer.food_pairing.length ? '.': ', '}}
+      </span>
+    </p>
+  </div>
+
+</ion-content>

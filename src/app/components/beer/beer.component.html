@@ -1,4 +1,6 @@
-<ion-card>
+<ion-card
+  [routerLink]="'/detail/' + beer.id"
+>
   <img [alt]="beer.name" [src]="beer.image_url" class="beer-image" />
   <ion-card-header>
     <ion-card-title>ABV: {{beer.abv}}%</ion-card-title>

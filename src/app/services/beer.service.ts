@@ -17,4 +17,8 @@ export class BeerService {
       })
     })
   }
+
+  getSingleBeer(id: number) {
+    return this.http.get<BeerInterface[]>(`https://api.punkapi.com/v2/beers/${id}`)
+  }
 }
