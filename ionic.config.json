@@ -1,0 +1,7 @@
+{
+  "name": "premium-bonus-test",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
