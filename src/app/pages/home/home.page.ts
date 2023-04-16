@@ -21,14 +21,18 @@ export class HomePage implements OnInit {
   currentPage: number = 1
   pages: {page: number}[] = [{page: 1}, {page: 2}, {page: 3}]
   isModalOpen: boolean = false
+  isLoading: boolean = true
 
   changePage(page: number) {
     if (page !== this.currentPage) {
+      this.isLoading = true
       this.currentPage = page
       this.beersList$ = this.beerService.getAllBeers(this.currentPage)
+      this.isLoading = false
     }
   }
   ngOnInit(): void {
     this.beersList$ = this.beerService.getAllBeers(this.currentPage)
+    this.isLoading = false
   }
 }

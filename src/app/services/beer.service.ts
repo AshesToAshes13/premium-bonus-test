@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {BeerInterface} from "../interfaces/beer.interface";
+import {delay} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
