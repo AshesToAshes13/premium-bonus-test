@@ -21,6 +21,8 @@ export class FavModalBoxComponent implements OnChanges {
       const favoriteJSON = localStorage.getItem('favorite')
       if (favoriteJSON !== null) {
         this.beersList = JSON.parse(favoriteJSON)
+      } else {
+        this.beersList = []
       }
     }
 
