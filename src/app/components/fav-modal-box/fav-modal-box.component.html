@@ -10,8 +10,18 @@
     </ion-header>
     <ion-content class="ion-padding">
       <div *ngIf="beersList.length">
-        <app-beer *ngFor="let beer of beersList" [beer]="beer" (click)="goToDetail(false, beer.id)"></app-beer>
+        <app-beer
+          *ngFor="let beer of beersList"
+          [beer]="beer"
+          (click)="goToDetail(false, beer.id)" />
       </div>
+<!--      <ion-title *ngIf="!beersList.length">Вы ничего не добавили в избранное</ion-title>-->
+      <p
+        *ngIf="!beersList.length"
+         style="font-size: 18px; font-weight: bold; text-align: center; text-wrap: normal"
+      >
+        Вы ничего не добавили в избранное
+      </p>
     </ion-content>
   </ng-template>
 </ion-modal>
