@@ -5,21 +5,42 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="isModalOpen = true">
-        <ion-icon name="star-outline" size="large" color="general"></ion-icon>
+        <ion-icon
+          name="star-outline"
+          size="large"
+          color="general"
+        />
       </ion-button>
     </ion-buttons>
-    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+    <ion-progress-bar
+      type="indeterminate"
+      *ngIf="isLoading"
+    />
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-beer *ngFor="let beer of beersList$ | async" [beer]="beer" (click)="openDetail(beer.id)"></app-beer>
-  <app-fav-modal-box [isShowModal]="isModalOpen" (closeModal)="closeModal(false)"></app-fav-modal-box>
+  <app-beer
+    *ngFor="let beer of beersList$ | async"
+    [beer]="beer"
+    (click)="openDetail(beer.id)"
+  />
+  <app-fav-modal-box
+    [isShowModal]="isModalOpen"
+    (closeModal)="closeModal(false)"
+  />
 </ion-content>
 
 <ion-footer slot="bottom" *ngIf="!isModalOpen">
   <ion-tab-bar slot="bottom">
-    <ion-tab-button *ngFor="let page of pages" (click)="changePage(page.page)" [selected]="page.page === currentPage" style="font-size: 18px">{{page.page}}</ion-tab-button>
+    <ion-tab-button
+      *ngFor="let page of pages"
+      (click)="changePage(page.page)"
+      [selected]="page.page === currentPage"
+      style="font-size: 18px"
+    >
+      {{page.page}}
+    </ion-tab-button>
   </ion-tab-bar>
 </ion-footer>
 
