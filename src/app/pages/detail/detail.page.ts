@@ -18,7 +18,7 @@ export class DetailPage implements OnInit {
   constructor(private beerService: BeerService) { }
 
   private activatedRoute = inject(ActivatedRoute);
-  beer: BeerInterface
+  beer: BeerInterface | null
   isInFav: boolean = false
 
   changeFavorite(currentBeer: BeerInterface) {
@@ -51,5 +51,4 @@ export class DetailPage implements OnInit {
       currentBeerInFav ? this.isInFav = true : this.isInFav = false
     }
   }
-
 }
