@@ -6,6 +6,7 @@ import {Observable} from "rxjs";
 import {BeerComponent} from "../../components/beer/beer.component";
 import {CommonModule} from "@angular/common";
 import {FavModalBoxComponent} from "../../components/fav-modal-box/fav-modal-box.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import {FavModalBoxComponent} from "../../components/fav-modal-box/fav-modal-box
   imports: [IonicModule, BeerComponent, CommonModule, FavModalBoxComponent],
 })
 export class HomePage implements OnInit {
-  constructor(private beerService: BeerService) {}
+  constructor(private beerService: BeerService, private router: Router) {}
 
   beersList$: Observable<BeerInterface[]>
   currentPage: number = 1
@@ -31,8 +32,15 @@ export class HomePage implements OnInit {
       this.isLoading = false
     }
   }
+  closeModal(isShow: boolean) {
+    this.isModalOpen = isShow
+  }
+  openDetail(beerId: number) {
+    return this.router.navigateByUrl(`/detail/${beerId}`)
+  }
   ngOnInit(): void {
     this.beersList$ = this.beerService.getAllBeers(this.currentPage)
     this.isLoading = false
   }
+
 }

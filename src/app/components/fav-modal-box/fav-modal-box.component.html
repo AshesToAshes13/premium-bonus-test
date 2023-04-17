@@ -10,7 +10,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <div *ngIf="beersList.length">
-        <app-beer *ngFor="let beer of beersList" [beer]="beer" (click)="close(false)"></app-beer>
+        <app-beer *ngFor="let beer of beersList" [beer]="beer" (click)="goToDetail(false, beer.id)"></app-beer>
       </div>
     </ion-content>
   </ng-template>

@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {IonicModule} from "@ionic/angular";
 import {BeerInterface} from "../../interfaces/beer.interface";
 import {BeerComponent} from "../beer/beer.component";
 import {NgForOf, NgIf} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-fav-modal-box',
@@ -11,22 +12,30 @@ import {NgForOf, NgIf} from "@angular/common";
   standalone: true,
   imports: [IonicModule, BeerComponent, NgForOf, NgIf]
 })
-export class FavModalBoxComponent  implements OnInit {
+export class FavModalBoxComponent implements OnChanges {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   beersList: BeerInterface[]
+  ngOnChanges(changes: SimpleChanges): void {
+      const favoriteJSON = localStorage.getItem('favorite')
+      if (favoriteJSON !== null) {
+        this.beersList = JSON.parse(favoriteJSON)
+      }
+    }
+
   @Input() isShowModal: boolean
   @Output() closeModal = new EventEmitter<boolean>()
-  ngOnInit() {
-    const favoriteJSON = localStorage.getItem('favorite')
-    if (favoriteJSON !== null) {
-      this.beersList = JSON.parse(favoriteJSON)
-    }
-  }
 
-  close(isShow: boolean) {
+  close(isShow: false) {
     this.closeModal.emit(isShow)
+  }
+  goToDetail(isShow: boolean, beerId: number) {
+    this.closeModal.emit(isShow)
+    // пришлось использовать таймаут т.к при изменении роута модалка не закрывалась хотя эмит работал нормально
+    setTimeout(()=> {
+      return this.router.navigateByUrl(`/detail/${beerId}`)
+    }, 0)
   }
 
 }

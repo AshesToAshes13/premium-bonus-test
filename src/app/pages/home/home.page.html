@@ -13,8 +13,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-beer *ngFor="let beer of beersList$ | async" [beer]="beer"></app-beer>
-  <app-fav-modal-box [isShowModal]="isModalOpen" (closeModal)="isModalOpen = false"></app-fav-modal-box>
+  <app-beer *ngFor="let beer of beersList$ | async" [beer]="beer" (click)="openDetail(beer.id)"></app-beer>
+  <app-fav-modal-box [isShowModal]="isModalOpen" (closeModal)="closeModal(false)"></app-fav-modal-box>
 </ion-content>
 
 <ion-footer slot="bottom" *ngIf="!isModalOpen">
