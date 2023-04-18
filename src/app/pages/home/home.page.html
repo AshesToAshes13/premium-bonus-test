@@ -29,6 +29,7 @@
     [isShowModal]="isModalOpen"
     (closeModal)="closeModal(false)"
   />
+  <app-error *ngIf="errorService.error$ | async" [errorText]="'cписка пива'" (reloadList)="reload()" />
 </ion-content>
 
 <ion-footer slot="bottom" *ngIf="!isModalOpen">

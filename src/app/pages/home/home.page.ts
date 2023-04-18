@@ -7,16 +7,22 @@ import {BeerComponent} from "../../components/beer/beer.component";
 import {CommonModule} from "@angular/common";
 import {FavModalBoxComponent} from "../../components/fav-modal-box/fav-modal-box.component";
 import {Router} from "@angular/router";
+import {ErrorService} from "../../services/error.service";
+import {ErrorComponent} from "../../components/global/error/error.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [IonicModule, BeerComponent, CommonModule, FavModalBoxComponent],
+  imports: [IonicModule, BeerComponent, CommonModule, FavModalBoxComponent, ErrorComponent],
 })
 export class HomePage implements OnInit {
-  constructor(private beerService: BeerService, private router: Router) {}
+  constructor(
+    private beerService: BeerService,
+    private router: Router,
+    public errorService: ErrorService
+  ) {}
 
   beersList$: Observable<BeerInterface[]>
   currentPage: number = 1
@@ -34,6 +40,12 @@ export class HomePage implements OnInit {
   }
   closeModal(isShow: boolean) {
     this.isModalOpen = isShow
+  }
+  reload() {
+    this.isLoading = true
+    this.errorService.clear()
+    this.beersList$ = this.beerService.getAllBeers(this.currentPage)
+    this.isLoading = false
   }
   openDetail(beerId: number) {
     return this.router.navigateByUrl(`/detail/${beerId}`)

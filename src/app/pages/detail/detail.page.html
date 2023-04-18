@@ -1,16 +1,17 @@
-<ion-header [translucent]="true" *ngIf="beer">
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-back-button
       slot="start"
       defaultHref="/"
     ></ion-back-button>
     <ion-title
+      *ngIf="beer"
       style="text-align: center"
     >
       {{ beer.name }}
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="changeFavorite(beer)">
+      <ion-button *ngIf="beer" (click)="changeFavorite(beer)">
         <ion-icon
           *ngIf="!isInFav"
           name="star-outline"
@@ -25,6 +26,10 @@
         />
       </ion-button>
     </ion-buttons>
+    <ion-progress-bar
+      type="indeterminate"
+      *ngIf="isLoading"
+    />
   </ion-toolbar>
 </ion-header>
 
@@ -48,4 +53,8 @@
     </p>
   </div>
 
+</ion-content>
+
+<ion-content *ngIf="errorService.error$ | async">
+  <app-error [errorText]="'информации о пиве'" (reloadList)="reload()" />
 </ion-content>
